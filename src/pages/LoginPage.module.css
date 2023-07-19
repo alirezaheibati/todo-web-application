@@ -4,4 +4,16 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
+  position: relative;
+}
+.skew-bg {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  background: linear-gradient(to right, #157aff, rgb(111, 177, 252));
+  transform: skewY(-10deg);
+  z-index: -1;
 }

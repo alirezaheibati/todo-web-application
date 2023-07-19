@@ -1,4 +1,4 @@
-.login_form_container {
+.register_form_container {
   background-color: #fff;
   border-radius: 10px;
   width: 400px;
@@ -6,25 +6,30 @@
   padding: 25px 50px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
-.login_form_from {
+.register_form_from {
   width: 100%;
 }
-.login_form_container small {
+.register_form_checkrules {
+  margin: 5px 0;
+  color: #b6b6b6;
+}
+.register_form_container small {
   color: #b6b6b6;
 }
 
-.login_form_btn {
+.register_form_btn {
   height: 40px;
   border-radius: 5px;
   border: none;
   width: 100%;
   color: #fff;
   background-color: #157aff;
+  margin-top: 5px;
 }
-.login_form_btn:active {
+.register_form_btn:active {
   transform: scale(0.98);
 }
-.login_form_from p {
+.register_form_from p {
   text-align: right;
   margin: 10px 0;
   color: rgb(21, 122, 255);
@@ -32,12 +37,12 @@
   font-size: 14px;
   font-weight: bold;
 }
-.login-form_signup {
+.register-form_signup {
   font-size: 14px;
   margin-top: 5px;
   color: #b6b6b6;
 }
-.login-form_signup span {
+.register-form_signup span {
   color: rgb(21, 122, 255);
   font-weight: bold;
   cursor: pointer;

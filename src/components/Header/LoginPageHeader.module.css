@@ -8,7 +8,7 @@
   justify-content: space-between;
   padding: 0 25px;
   align-items: center;
-  border-bottom: 1px solid gray;
+  border-bottom: 1px solid rgb(212, 212, 212);
 }
 .login-page_header h2 {
   background: linear-gradient(to right, rgb(0, 82, 212), rgb(21, 122, 255));
