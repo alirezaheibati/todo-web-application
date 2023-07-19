@@ -1,0 +1,42 @@
+.login-page_header {
+  position: fixed;
+  height: 75px;
+  width: 100vw;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 25px;
+  align-items: center;
+  border-bottom: 1px solid gray;
+}
+.login-page_header h2 {
+  background: linear-gradient(to right, rgb(0, 82, 212), rgb(21, 122, 255));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  /* text-fill-color: transparent; */
+}
+.login-page_header button {
+  border: none;
+  margin-right: 15px;
+  font-size: 16px;
+  width: 100px;
+  height: 30px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.login-page_header button:active {
+  transform: scale(0.98);
+}
+.header-register_btn {
+  background-color: #157aff;
+  color: #fff;
+}
+.header-login_btn {
+  color: gray;
+}
+.header-login_btn:hover {
+  background-color: rgb(21, 122, 255);
+  color: #fff;
+}
