@@ -3,6 +3,7 @@ import { faEnvelope, faLock, faUser } from "@fortawesome/free-solid-svg-icons";
 import Input from "../FrequentlyUsed/Input";
 import { useRef } from "react";
 import useHttp from "./../../hooks/use-http";
+import LoadingSpinner from "../FrequentlyUsed/LoadingSpinner";
 const Register = (props) => {
   const nameInputRef = useRef();
   const emailInputRef = useRef();
@@ -50,6 +51,7 @@ const Register = (props) => {
   };
   return (
     <div className={classes["register_form_container"]}>
+      {isLoading && <LoadingSpinner />}
       <h2>Get Started</h2>
       <small>Create your account now.</small>
       <form

@@ -1,7 +1,7 @@
 import classes from "./Login.module.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
 import Input from "../FrequentlyUsed/Input";
+import LoadingSpinner from "../FrequentlyUsed/LoadingSpinner";
 const Login = (props) => {
   const formChangeHandler = () => {
     props.onChangeVisiblFrom("register");
