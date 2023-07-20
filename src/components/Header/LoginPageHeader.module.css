@@ -29,14 +29,15 @@
 .login-page_header button:active {
   transform: scale(0.98);
 }
-.header-register_btn {
-  background-color: #157aff;
-  color: #fff;
-}
+
 .header-login_btn {
   color: gray;
 }
 .header-login_btn:hover {
   background-color: rgb(21, 122, 255);
+  color: #fff;
+}
+.header-active-btn {
+  background-color: #157aff;
   color: #fff;
 }

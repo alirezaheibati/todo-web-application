@@ -2,7 +2,10 @@ import classes from "./Login.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
 import Input from "../FrequentlyUsed/Input";
-const Login = () => {
+const Login = (props) => {
+  const formChangeHandler = () => {
+    props.onChangeVisiblFrom("register");
+  };
   return (
     <div className={classes["login_form_container"]}>
       <h2>Welcome back!</h2>
@@ -27,7 +30,8 @@ const Login = () => {
         </button>
       </form>
       <p className={classes["login-form_signup"]}>
-        Don't you have an account? <span> Sign Up</span>
+        Don't you have an account?{" "}
+        <span onClick={formChangeHandler}> Sign Up</span>
       </p>
     </div>
   );

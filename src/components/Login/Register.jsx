@@ -1,7 +1,10 @@
 import classes from "./Register.module.css";
 import { faEnvelope, faLock, faUser } from "@fortawesome/free-solid-svg-icons";
 import Input from "../FrequentlyUsed/Input";
-const Register = () => {
+const Register = (props) => {
+  const formChangeHandler = () => {
+    props.onChangeVisiblFrom("login");
+  };
   return (
     <div className={classes["register_form_container"]}>
       <h2>Get Started</h2>
@@ -34,7 +37,7 @@ const Register = () => {
         </button>
       </form>
       <p className={classes["register-form_signup"]}>
-        Have an account? <span> Login</span>
+        Have an account? <span onClick={formChangeHandler}> Login</span>
       </p>
     </div>
   );
