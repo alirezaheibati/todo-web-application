@@ -1,25 +1,33 @@
 import classes from "./Register.module.css";
 import { faEnvelope, faLock, faUser } from "@fortawesome/free-solid-svg-icons";
 import Input from "../FrequentlyUsed/Input";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import useHttp from "./../../hooks/use-http";
 import LoadingSpinner from "../FrequentlyUsed/LoadingSpinner";
+import Modal from "../FrequentlyUsed/Modal";
 const Register = (props) => {
+  const [modalVisibility, setModalVisibility] = useState(true);
   const nameInputRef = useRef();
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
 
   const { error, isLoading, sendRequest } = useHttp();
-  console.log(error);
+
+  const modalCloseHandler = () => {
+    setModalVisibility(false);
+  };
+
   const formChangeHandler = () => {
     props.onChangeVisiblFrom("login");
   };
+
   const registerdUserDataHandler = (result) => {
     console.log(result);
   };
 
   const userRegisterHandler = (e) => {
     e.preventDefault();
+    setModalVisibility(true);
     if (
       nameInputRef.current.value.trim().length > 0 &&
       emailInputRef.current.value.trim().length > 0 &&
@@ -52,6 +60,9 @@ const Register = (props) => {
   return (
     <div className={classes["register_form_container"]}>
       {isLoading && <LoadingSpinner />}
+      {modalVisibility && error && (
+        <Modal title="Error" description={error} onClick={modalCloseHandler} />
+      )}
       <h2>Get Started</h2>
       <small>Create your account now.</small>
       <form
