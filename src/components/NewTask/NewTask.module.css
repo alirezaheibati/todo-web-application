@@ -80,3 +80,6 @@
   align-items: center;
   position: relative;
 }
+.new-task_btn:hover div {
+  display: initial;
+}

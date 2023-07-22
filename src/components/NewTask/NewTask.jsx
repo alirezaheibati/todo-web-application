@@ -2,6 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classes from "./NewTask.module.css";
 import { faCalendar, faFlag } from "@fortawesome/free-regular-svg-icons";
 import { faTag } from "@fortawesome/free-solid-svg-icons";
+import NewTaskPriority from "./NewTaskPriority";
 const NewTask = () => {
   return (
     <div className={classes["new-task_container"]}>
@@ -18,6 +19,7 @@ const NewTask = () => {
             <div className={classes["new-task_btn-container"]}>
               <button className={classes["new-task_btn"]}>
                 <FontAwesomeIcon icon={faFlag} />
+                <NewTaskPriority />
               </button>
               <button className={classes["new-task_btn"]}>
                 <FontAwesomeIcon icon={faCalendar} />
