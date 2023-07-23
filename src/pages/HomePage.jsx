@@ -6,8 +6,8 @@ const HomePage = () => {
   return (
     <div className={classes["home-page_container"]}>
       <NewTask />
-      <Sidebar />
-      <Overview />
+      {/* <Sidebar /> */}
+      {/* <Overview /> */}
     </div>
   );
 };
