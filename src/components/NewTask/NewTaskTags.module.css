@@ -1,44 +1,58 @@
 .tags-container {
-  background-color: red;
   position: fixed;
   left: 0;
   bottom: 0;
   width: 100vw;
   height: 100vh;
-  z-index: 1100;
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  z-index: 1100;
+}
+.tags-backdrop {
+  background-color: rgba(0, 0, 0, 0.7);
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
 }
 .tags-content {
   background-color: #fff;
+  position: relative;
   padding: 10px;
   border-radius: 10px;
   width: 200px;
+  z-index: 1110;
 }
 
 ul {
   list-style-type: none;
 }
-
+.tags-content_list {
+  max-height: 200px;
+  overflow-y: auto;
+  padding-top: 10px;
+}
 .tags-content_list > li {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 6px;
 }
-.tags-content_list > li div {
+
+.tags-color_palette {
   position: relative;
   cursor: pointer;
 }
-.tags-content_list > li div:hover .tags-content_menu {
-  display: initial;
+.tags-color_palette:hover .tags-content_menu {
+  display: flex;
 }
-.tags-content_list > li div p {
-  font-size: 20px;
-  font-weight: bold;
-  transform: translateY(-6px);
+.tags-row_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
 }
 .tags-content_list > li > p {
   font-size: 14px;
@@ -49,19 +63,26 @@ ul {
 }
 .tags-content_menu {
   position: absolute;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-
-  left: 0;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  right: 0;
   bottom: 0;
   background-color: #fff;
   width: 110px;
   padding: 10px;
   border-radius: 5px;
   display: none;
+  justify-content: center;
+  align-items: center;
+  gap: 2px;
 }
 .tags-content_menu li {
-  margin-bottom: 5px;
+  width: 15px;
+  height: 15px;
+  border-radius: 2px;
   cursor: pointer;
+}
+.tags-content_menu li:hover {
+  outline: 1px solid #4682a9;
 }
 .tags-content_menu li:last-child {
   margin-bottom: 0;
@@ -72,9 +93,9 @@ ul {
   border-radius: 5px;
   padding: 0 5px;
   font-size: 16px;
-  margin-bottom: 10px;
 }
 .tags-content > p {
   color: gray;
   text-align: center;
+  font-size: 14px;
 }

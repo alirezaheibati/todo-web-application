@@ -24,6 +24,7 @@
   z-index: 1001;
   border-radius: 10px;
   padding: 20px;
+  position: relative;
 }
 .new-task_content h3 {
   text-align: center;
@@ -82,4 +83,13 @@
 }
 .new-task_btn:hover div {
   display: initial;
+}
+.new-task_closeBtn {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  background-color: gainsboro;
+  padding: 5px;
+  border-radius: 50%;
+  cursor: pointer;
 }
