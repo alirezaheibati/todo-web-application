@@ -42,7 +42,9 @@ const Tag = (props) => {
 const NewTaskTags = (props) => {
   const tagInputRef = useRef();
   const [tagList, setTagList] = useState([]);
-
+  const sendTagsToNewTask = () => {
+    props.onHideTagCreator(tagList);
+  };
   const tagRemove = (id) => {
     const newArr = tagList.filter((tag) => {
       if (tag.id !== id) {
@@ -81,9 +83,7 @@ const NewTaskTags = (props) => {
     <div className={classes["tags-container"]}>
       <div
         className={classes["tags-backdrop"]}
-        onClick={() => {
-          props.onHideTagCreator();
-        }}
+        onClick={sendTagsToNewTask}
       ></div>
       <div className={classes["tags-content"]}>
         <form onSubmit={addNewTagHandler}>

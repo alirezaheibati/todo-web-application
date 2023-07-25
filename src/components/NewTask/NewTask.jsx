@@ -1,19 +1,35 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classes from "./NewTask.module.css";
 import { faCalendar, faFlag } from "@fortawesome/free-regular-svg-icons";
-import { faTag, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faPalette, faTag, faXmark } from "@fortawesome/free-solid-svg-icons";
 import NewTaskPriority from "./NewTaskPriority";
 import NewTaskTags from "./NewTaskTags";
 import { useState } from "react";
+import NewTaskPalette from "./NewTaskPalette";
 const NewTask = (props) => {
   const [showTags, setShowTags] = useState(false);
+  const [tagsList, setTagsList] = useState([]);
+
+  const [showPalette, setShowPalette] = useState(false);
+  const [paletteColor, setPaletteColor] = useState("gray");
+
   const [priorityFlagColor, setPriorityFlagColor] = useState(null);
   const showTagsHandler = () => {
     setShowTags(true);
   };
-  const hideTagCreatorHandler = () => {
+  const showPaletteHandler = () => {
+    setShowPalette(true);
+  };
+
+  const hideTagCreatorHandler = (tags) => {
+    setTagsList(tags);
     setShowTags(false);
   };
+  const hidePaletteHandler = (paletteColor) => {
+    setPaletteColor(paletteColor);
+    setShowPalette(false);
+  };
+
   const prioritySelectionHandler = (color) => {
     setPriorityFlagColor(color);
   };
@@ -21,6 +37,8 @@ const NewTask = (props) => {
   return (
     <div className={classes["new-task_container"]}>
       {showTags && <NewTaskTags onHideTagCreator={hideTagCreatorHandler} />}
+      {showPalette && <NewTaskPalette onHidePalette={hidePaletteHandler} />}
+
       <div className={classes["new-task_backdrop"]}></div>
       <div className={classes["new-task_content"]}>
         <FontAwesomeIcon
@@ -65,8 +83,27 @@ const NewTask = (props) => {
                 className={classes["new-task_btn"]}
                 type="button"
                 onClick={showTagsHandler}
+                style={{
+                  borderColor: `${tagsList.length > 0 ? "#3CB371" : "gray"}`,
+                }}
               >
-                <FontAwesomeIcon icon={faTag} />
+                <FontAwesomeIcon
+                  icon={faTag}
+                  style={{
+                    color: `${tagsList.length > 0 ? "#3CB371" : "gray"}`,
+                  }}
+                />
+              </button>
+              <button
+                className={classes["new-task_btn"]}
+                type="button"
+                onClick={showPaletteHandler}
+                style={{ borderColor: paletteColor }}
+              >
+                <FontAwesomeIcon
+                  icon={faPalette}
+                  style={{ color: paletteColor }}
+                />
               </button>
             </div>
             <button className={classes["new-task_submit"]} type="submit">
