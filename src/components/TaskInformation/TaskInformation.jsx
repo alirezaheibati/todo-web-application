@@ -12,6 +12,10 @@ import {
   faFlag,
 } from "@fortawesome/free-regular-svg-icons";
 const TaskInformation = (props) => {
+  const taskInfoCloseHandler = (e) => {
+    e.stopPropagation();
+    props.onCloseTaskInfo();
+  };
   return (
     <div className={classes["task-info_container"]}>
       <div className={classes["task-info_backdrop"]}></div>
@@ -19,6 +23,7 @@ const TaskInformation = (props) => {
         <FontAwesomeIcon
           icon={faXmark}
           className={classes["task-info_close"]}
+          onClick={taskInfoCloseHandler}
         />
         <div className={classes["task-info_left"]}>
           <h3>My first task</h3>

@@ -7,7 +7,6 @@ const Overview = (props) => {
     <div className={classes["overview_container"]}>
       <ColumnContainer />
       {/* <ListViewContainer /> */}
-      <TaskInformation />
     </div>
   );
 };
