@@ -9,11 +9,20 @@ import {
   faTableColumns,
 } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
-
+import { userInfoSliceActions } from "../../store";
+import { useSelector, useDispatch } from "react-redux";
 const Sidebar = () => {
   const [hideMenu, setHideMenu] = useState(false);
+  const userData = useSelector((store) => store.userInfo);
+  const dispatch = useDispatch();
   const toggleMenu = () => {
     setHideMenu((prev) => !prev);
+  };
+  const userLogoutHandler = () => {
+    if (confirm("Do you want to quit?")) {
+      localStorage.clear();
+      dispatch(userInfoSliceActions.userLogout());
+    }
   };
   return (
     <div className={classes["sidebar_container"]}>
@@ -26,8 +35,8 @@ const Sidebar = () => {
       <div className={classes["sidebar-user_info"]}>
         <img src={avatar} alt="avatar" />
         <div>
-          <p>alireza heibati</p>
-          <p title="alirezaheibati91@gmail.com">alirezaheibati91@gmail.com</p>
+          <p>{userData.username}</p>
+          <p title={userData.email}>{userData.email}</p>
         </div>
       </div>
       <div
@@ -64,7 +73,12 @@ const Sidebar = () => {
         </ul>
         <ul></ul>
       </div>
-      <button className={classes["sidebar-logout_btn"]}>Log out</button>
+      <button
+        className={classes["sidebar-logout_btn"]}
+        onClick={userLogoutHandler}
+      >
+        Log out
+      </button>
     </div>
   );
 };

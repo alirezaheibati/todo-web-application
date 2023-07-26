@@ -1,38 +1,34 @@
 import { createSlice, configureStore } from "@reduxjs/toolkit";
-const initialTaskTags = [
-  { tagName: "Meeting", id: "t1", tagColor: "#c8eaee" },
-  { tagName: "Work", id: "t2", tagColor: "#f800c8" },
-];
+
 const initialUserInfo = {
-  username: "user",
-  email: "email",
-  userId: "id",
-  sessionToken: "sessionToken",
+  username: undefined,
+  email: undefined,
+  userId: undefined,
+  sessionToken: undefined,
 };
 const userInfoSlice = createSlice({
   name: "userInfo",
   initialState: initialUserInfo,
   reducers: {
-    setUserInfo(state, action) {},
-    updateUserInfo(state) {},
-  },
-});
-
-const tagsSlice = createSlice({
-  name: "taskTags",
-  initialState: initialTaskTags,
-  reducers: {
-    addNewTag(state, action) {
-      state.push(action.payload);
+    setUserInfo(state, action) {
+      state.username = action.payload.username;
+      state.email = action.payload.email;
+      state.userId = action.payload.userId;
+      state.sessionToken = action.payload.sessionToken;
     },
-    removeTag(state, action) {},
+    updateUserInfo(state) {},
+    userLogout(state) {
+      state.username = undefined;
+      state.email = undefined;
+      state.userId = undefined;
+      state.sessionToken = undefined;
+    },
   },
 });
 
 const store = configureStore({
-  reducer: { userInfo: userInfoSlice.reducer, tasktags: tagsSlice.reducer },
+  reducer: { userInfo: userInfoSlice.reducer },
 });
 export const userInfoSliceActions = userInfoSlice.actions;
-export const taskTagsSliceActions = tagsSlice.actions;
 
 export default store;

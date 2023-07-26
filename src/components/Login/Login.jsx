@@ -5,19 +5,27 @@ import Input from "../FrequentlyUsed/Input";
 import LoadingSpinner from "../FrequentlyUsed/LoadingSpinner";
 import useHttp from "../../hooks/use-http";
 import Modal from "../FrequentlyUsed/Modal";
-
+import { useDispatch } from "react-redux";
+import { userInfoSliceActions } from "../../store";
 const Login = (props) => {
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
   const { error, isLoading, sendRequest } = useHttp();
   const [modalVisibility, setModalVisibility] = useState(true);
-
+  const dispatch = useDispatch();
   const modalCloseHandler = () => {
     setModalVisibility(false);
   };
-
   const loginUserDataHandler = (result) => {
-    console.log(result);
+    localStorage.setItem("userId", result.objectId);
+    dispatch(
+      userInfoSliceActions.setUserInfo({
+        username: result.username,
+        email: result.email,
+        userId: result.objectId,
+        sessionToken: result.sessionToken,
+      })
+    );
   };
 
   const userLoginHandler = (e) => {

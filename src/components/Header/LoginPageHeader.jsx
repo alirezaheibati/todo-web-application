@@ -5,7 +5,7 @@ const LoginPageHeader = (props) => {
   };
   return (
     <div className={classes["login-page_header"]}>
-      <h2>TaskMask Manager</h2>
+      <h2>TaskMate Manager</h2>
       <div>
         <button
           onClick={formChangeHandler}
