@@ -11,32 +11,38 @@ import {
 import { useState } from "react";
 import { userInfoSliceActions } from "../../store";
 import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 const Sidebar = () => {
   const [hideMenu, setHideMenu] = useState(false);
   const userData = useSelector((store) => store.userInfo);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const toggleMenu = () => {
     setHideMenu((prev) => !prev);
   };
+  console.log(userData);
   const userLogoutHandler = () => {
-    if (confirm("Do you want to quit?")) {
+    if (confirm("Do you want to logout?")) {
       localStorage.clear();
       dispatch(userInfoSliceActions.userLogout());
+      navigate("/login");
     }
   };
   return (
     <div className={classes["sidebar_container"]}>
       <div className={classes["sidebar_branding"]}>
         <h1>
-          Task<span>mate</span>
+          Task<span>Mate</span>
         </h1>
         <small>Focus, Prioritize, Execute</small>
       </div>
       <div className={classes["sidebar-user_info"]}>
         <img src={avatar} alt="avatar" />
         <div>
-          <p>{userData.username}</p>
-          <p title={userData.email}>{userData.email}</p>
+          <p>{localStorage.getItem("username")}</p>
+          <p title={localStorage.getItem("email")}>
+            {localStorage.getItem("email")}
+          </p>
         </div>
       </div>
       <div
@@ -73,6 +79,7 @@ const Sidebar = () => {
         </ul>
         <ul></ul>
       </div>
+
       <button
         className={classes["sidebar-logout_btn"]}
         onClick={userLogoutHandler}

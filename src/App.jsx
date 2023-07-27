@@ -10,15 +10,16 @@ import {
 import HomePage from "./pages/HomePage";
 import ProfilePage from "./pages/ProfilePage";
 import { useSelector } from "react-redux";
-
+import useHttp from "./hooks/use-http";
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [logInHelper, setLogInHelper] = useState(false);
 
   const userData = useSelector((store) => store.userInfo);
   const navigate = useNavigate();
+  let userInfoID = localStorage.getItem("userId");
   useEffect(() => {
-    if (localStorage.getItem("userId")) {
+    if (userInfoID) {
       setIsLoggedIn(true);
       setLogInHelper(true);
     } else {
@@ -26,11 +27,13 @@ function App() {
       setLogInHelper(true);
       navigate("/login");
     }
-  }, [userData]);
+  }, [userInfoID]);
   return (
     <>
       <Routes>
-        {logInHelper && isLoggedIn && <Route path="/" element={<HomePage />} />}
+        {logInHelper && isLoggedIn && (
+          <Route path="/homepage" element={<HomePage />} />
+        )}
         {logInHelper && isLoggedIn && (
           <Route path="/profile" element={<ProfilePage />} />
         )}
