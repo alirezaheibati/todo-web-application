@@ -1,29 +1,29 @@
 import { useState } from "react";
 import classes from "./NewTaskPalette.module.css";
 const taskColor = [
-  "rgb(132, 198, 161)",
-  "rgb(120, 198, 176)",
-  "rgb(118, 188, 134)",
-  "rgb(128, 220, 105)",
-  "rgb(228, 97, 97)",
-  "rgb(225, 126, 128)",
-  "rgb(236, 129, 130)",
-  "rgb(243, 197, 103)",
-  "rgb(185, 153, 94)",
-  "rgb(229, 122, 87)",
-  "rgb(241, 162, 92)",
-  "rgb(226, 138, 96)",
-  "rgb(104, 151, 194)",
-  "rgb(116, 170, 221)",
-  "rgb(60, 69, 231)",
-  "rgb(109, 175, 206)",
-  "rgb(108, 178, 247)",
-  "rgb(146, 134, 234)",
-  "rgb(192, 116, 209)",
-  "rgb(72, 103, 116)",
+  "#FFEECC",
+  "#E8FFCE",
+  "#F6F4EB",
+  "#F4D9E7",
+  "#F4F2DE",
+  "#EDE4FF",
+  "#F8FDCF",
+  "#DAFFFB",
+  "#ECF8F9",
+  "#D2E9E9",
+  "#E7CBCB",
+  "#FDE2F3",
+  "#F0F0F0",
+  "#FFE6C7",
+  "#F5C6EC",
+  "#E9EDC9",
+  "#FBFFB1",
+  "#DDF7E3",
+  "#ECF2FF",
+  "#E3F6FF",
 ];
 const NewTaskPalette = (props) => {
-  const [btnColor, setBtnColor] = useState("rgb(132, 198, 161)");
+  const [btnColor, setBtnColor] = useState("#FFEECC");
 
   const paletteColorSelector = (e) => {
     setBtnColor(e.target.getAttribute("data-palette-color"));
@@ -53,7 +53,7 @@ const NewTaskPalette = (props) => {
         </ul>
 
         <button
-          style={{ backgroundColor: btnColor }}
+          style={{ backgroundColor: btnColor, color: "gray" }}
           onClick={choosePaletteColor}
         >
           Set color

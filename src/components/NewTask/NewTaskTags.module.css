@@ -99,3 +99,12 @@ ul {
   text-align: center;
   font-size: 14px;
 }
+.tags-done_btn {
+  width: 100%;
+  border: none;
+  background-color: #157aff;
+  border-radius: 5px;
+  padding: 5px 0;
+  color: #fff;
+  cursor: pointer;
+}

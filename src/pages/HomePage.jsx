@@ -14,6 +14,7 @@ const HomePage = () => {
   const userData = useSelector((store) => store.userInfo);
   const dispatch = useDispatch();
   useEffect(() => {
+    console.log(userData.refresher);
     const UserDataHandler = (data) => {
       dispatch(userInfoSliceActions.setUserInfo(data));
     };
@@ -32,7 +33,7 @@ const HomePage = () => {
       },
       UserDataHandler
     );
-  }, []);
+  }, [userData.refresher]);
   return (
     <div className={classes["home-page_container"]}>
       {isLoading && <LoadingSpinner />}

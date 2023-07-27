@@ -2,7 +2,7 @@ import { faPalette, faXmark } from "@fortawesome/free-solid-svg-icons";
 import classes from "./NewTaskTags.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 const tagsColor = ["#84c6a1", "#DDE6ED", "#FFEEBB", "#74aadd", "#ec8182"];
 const Tag = (props) => {
   const tagColorChangeHandler = (e) => {
@@ -12,6 +12,7 @@ const Tag = (props) => {
   const tagRemoveHandler = () => {
     props.onRemoveTag(props.id);
   };
+
   return (
     <li>
       <p style={{ backgroundColor: `${props.tagColor}` }}>{props.tagName}</p>
@@ -42,6 +43,9 @@ const Tag = (props) => {
 const NewTaskTags = (props) => {
   const tagInputRef = useRef();
   const [tagList, setTagList] = useState([]);
+  useEffect(() => {
+    setTagList(props.startingTagList);
+  }, []);
   const sendTagsToNewTask = () => {
     props.onHideTagCreator(tagList);
   };
@@ -105,6 +109,14 @@ const NewTaskTags = (props) => {
             );
           })}
         </ul>
+        {tagList.length > 0 && (
+          <button
+            className={classes["tags-done_btn"]}
+            onClick={sendTagsToNewTask}
+          >
+            Done
+          </button>
+        )}
       </div>
     </div>
   );

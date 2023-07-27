@@ -1,6 +1,6 @@
 import { createSlice, configureStore } from "@reduxjs/toolkit";
 
-const initialUserInfo = { info: {} };
+const initialUserInfo = { info: {}, refresher: true };
 const userInfoSlice = createSlice({
   name: "userInfo",
   initialState: initialUserInfo,
@@ -8,7 +8,9 @@ const userInfoSlice = createSlice({
     setUserInfo(state, action) {
       state.info = action.payload;
     },
-    updateUserInfo(state) {},
+    updateUserInfo(state) {
+      state.refresher = !state.refresher;
+    },
     userLogout(state) {
       state.info = {};
     },

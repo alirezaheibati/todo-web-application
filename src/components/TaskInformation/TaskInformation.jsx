@@ -26,10 +26,9 @@ const TaskInformation = (props) => {
           onClick={taskInfoCloseHandler}
         />
         <div className={classes["task-info_left"]}>
-          <h3>My first task</h3>
+          <h3>{props.title}</h3>
           <p className={classes["task-info_description"]}>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Amet
-            assumenda officia dolor. Velit maiores corporis sapiente nulla quos
+            {props.description}
           </p>
           <div className={classes["task-info_details"]}>
             <div className={classes["task-info_details-box"]}>
@@ -38,7 +37,7 @@ const TaskInformation = (props) => {
               </div>
               <div>
                 <p>Category:</p>
-                <p>In Progress</p>
+                <p>{props.category}</p>
               </div>
             </div>
             <div className={classes["task-info_details-box"]}>
@@ -47,7 +46,7 @@ const TaskInformation = (props) => {
               </div>
               <div>
                 <p>Deadline:</p>
-                <p>4th of July</p>
+                <p>{props.deadline}</p>
               </div>
             </div>
             <div className={classes["task-info_details-box"]}>
@@ -56,7 +55,7 @@ const TaskInformation = (props) => {
               </div>
               <div>
                 <p>Priority:</p>
-                <p>Urgent</p>
+                <p>{props.priority}</p>
               </div>
             </div>
             <div className={classes["task-info_details-box"]}>
@@ -65,17 +64,18 @@ const TaskInformation = (props) => {
               </div>
               <div>
                 <p>Tags:</p>
-                <p>tag1, tag2, tag3</p>
+                <p>{String(props.tags.map((tag) => tag.tagName))}</p>
               </div>
             </div>
           </div>
         </div>
         <div className={classes["task-info_right"]}>
-          {/* <p>No Comment for this task yet</p> */}
+          {!props.comments && <p>No Comment for this task yet</p>}
           <ul className={classes["task-info_comments"]}>
-            <li>Lorem ipsum dolor sit, amet consectetur adipisicing.</li>
-            <li>Lorem ipsum dolor sit amet.</li>
-            <li>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</li>
+            {props.comments &&
+              props.comments.map((comment) => (
+                <li key={comment.id}>{comment.message}</li>
+              ))}
           </ul>
           <form>
             <div>

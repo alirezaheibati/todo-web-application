@@ -19,16 +19,27 @@ const TaskColumnView = (props) => {
   return (
     <>
       {taskInfoVisibility && (
-        <TaskInformation onCloseTaskInfo={taskInfoCloseHandler} />
+        <TaskInformation
+          onCloseTaskInfo={taskInfoCloseHandler}
+          deadline={props.deadline}
+          title={props.title}
+          description={props.description}
+          tags={props.tags}
+          priority={props.priority}
+          id={props.id}
+          category={props.category}
+          comments={props.comments}
+        />
       )}
       <div
         className={classes["task-column_container"]}
         onClick={taskInfoShowHandler}
+        style={{ backgroundColor: props.taskColor }}
       >
         <div className={classes["task-column_header"]}>
           <div title="deadline">
             <FontAwesomeIcon icon={faFlagCheckered} />
-            <p>14 of july</p>
+            <p>{props.deadline}</p>
           </div>
           <button className={classes["task-column_menu"]}>
             <p>...</p>
@@ -45,39 +56,34 @@ const TaskColumnView = (props) => {
           </button>
         </div>
 
-        <h2 className={classes["task-column_title"]}>title task title</h2>
+        <h2 className={classes["task-column_title"]}>{props.title}</h2>
         <div className={classes["task-column_description"]}>
-          <p>
-            some text about task some text about some text about some text about
-            task some text about
-          </p>
+          <p>{props.description}</p>
         </div>
         <div className={classes["task-column_tags"]}>
           <div>
-            <p>tag 1</p>
-            <p>tag 2</p>
-            <p>tag 3</p>
+            {props.tags.map((tag) => (
+              <p key={tag.id} style={{ backgroundColor: tag.tagColor }}>
+                {tag.tagName}
+              </p>
+            ))}
           </div>
-          <button title="set Priority">
-            <FontAwesomeIcon icon={faFlag} />
-            <ul>
-              <li>
-                <FontAwesomeIcon icon={faFlag} style={{ color: "red" }} />
-                <p>Urgent</p>
-              </li>
-              <li>
-                <FontAwesomeIcon icon={faFlag} style={{ color: "orange" }} />
-                <p>High</p>
-              </li>
-              <li>
-                <FontAwesomeIcon icon={faFlag} style={{ color: "F0DE36" }} />
-                <p>Medium</p>
-              </li>
-              <li>
-                <FontAwesomeIcon icon={faFlag} style={{ color: "blue" }} />
-                <p>Low</p>
-              </li>
-            </ul>
+          <button>
+            <FontAwesomeIcon
+              icon={faFlag}
+              style={{
+                color: `${
+                  props.priority === "Urgent"
+                    ? "red"
+                    : props.priority === "High"
+                    ? "Orange"
+                    : props.priority === "Medium"
+                    ? "Orange"
+                    : "blue"
+                }`,
+              }}
+              title={props.priority}
+            />
           </button>
         </div>
       </div>

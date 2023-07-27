@@ -20,7 +20,6 @@ const Sidebar = () => {
   const toggleMenu = () => {
     setHideMenu((prev) => !prev);
   };
-  console.log(userData);
   const userLogoutHandler = () => {
     if (confirm("Do you want to logout?")) {
       localStorage.clear();

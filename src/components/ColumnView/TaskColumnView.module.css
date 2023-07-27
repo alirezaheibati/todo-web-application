@@ -91,28 +91,5 @@
   position: relative;
   background-color: transparent;
   border: none;
-}
-.task-column_tags button ul {
-  list-style-type: none;
-  display: none;
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  background-color: #fff;
-  padding: 8px;
-  border-radius: 5px;
-  width: 100px;
-}
-.task-column_tags button:hover ul {
-  display: initial;
-}
-.task-column_tags button ul li {
-  display: flex;
-  gap: 6px;
-  font-size: 14px;
-  cursor: pointer;
-  margin-bottom: 8px;
-}
-.task-column_tags button ul li:last-child {
-  margin-bottom: 0;
+  font-size: 18px;
 }
