@@ -1,9 +1,12 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
-
+import { useNavigate } from "react-router-dom";
 import classes from "./ProfilePage.module.css";
 import avatar from "./../assets/avatar.png";
+import useHttp from "../hooks/use-http";
+import { useSelector } from "react-redux";
+import LoadingSpinner from "../components/FrequentlyUsed/LoadingSpinner";
 const themeColor = [
   "rgb(21, 122, 255)",
   "rgb(120, 198, 176)",
@@ -17,8 +20,14 @@ const themeColor = [
   "rgb(241, 162, 92)",
 ];
 const ProfilePage = () => {
+  const userData = useSelector((store) => store.userInfo);
+  const { isLoading, error, sendRequest } = useHttp();
+  const navigate = useNavigate();
   const [selectedColor, setSelectedColor] = useState("rgb(21, 122, 255)");
   const [nightVision, setNightVision] = useState(false);
+  const firstNameRef = useRef();
+  const lastNameRef = useRef();
+  const ageInputRef = useRef();
 
   const colorPickerHandler = (e) => {
     setSelectedColor(e.target.style.backgroundColor);
@@ -26,8 +35,40 @@ const ProfilePage = () => {
   const changeThemeHandler = (e) => {
     setNightVision((prevState) => !prevState);
   };
+
+  const backToHomePageHandler = () => {
+    navigate("/");
+  };
+  const updateUserHandler = (data) => {
+    console.log(data);
+  };
+  const updateUserInfoHanlder = (e) => {
+    e.preventDefault();
+    sendRequest(
+      {
+        url: `https://parseapi.back4app.com/users/${localStorage.getItem(
+          "userId"
+        )}`,
+        method: "PUT",
+        headers: {
+          "X-Parse-Application-Id": "VUBEmOkNcXSUnYBMnOj68tnzu1jnkopyO6Ow2OGb",
+
+          "X-Parse-REST-API-Key": " NbyD4dNV7pNxrzzCRXQXLUd6cb8C2776i53CBSgW",
+          "X-Parse-Session-Token": localStorage.getItem("sessionToken"),
+          "Content-Type": "application/json",
+        },
+        body: {
+          firstName: firstNameRef.current.value,
+          lastName: lastNameRef.current.value,
+          userAge: +ageInputRef.current.value,
+        },
+      },
+      updateUserHandler
+    );
+  };
   return (
     <div className={classes["profile-container"]}>
+      {isLoading && <LoadingSpinner />}
       <div className={classes["profile-sidebar_container"]}>
         <div className={classes["profile-sidebar_branding"]}>
           <h1>
@@ -45,23 +86,41 @@ const ProfilePage = () => {
         <button className={classes["profile-logout_btn"]}>Log out</button>
       </div>
       <div className={classes["profile-info_container"]}>
-        <button className={classes["profile-info_backBtn"]}>Back</button>
-        <form>
+        <button
+          className={classes["profile-info_backBtn"]}
+          onClick={backToHomePageHandler}
+        >
+          Back
+        </button>
+        <form onSubmit={updateUserInfoHanlder}>
           <div className={classes["profile-info_actions"]}>
-            <label htmlFor="">Email:</label>
-            <input type="text" value={"alirezaheibati@gmail.com"} readOnly />
+            <label>Email:</label>
+            <input type="text" value={localStorage.getItem("email")} readOnly />
           </div>
           <div className={classes["profile-info_actions"]}>
-            <label htmlFor="">Name:</label>
-            <input type="text" />
+            <label>Name:</label>
+            <input
+              type="text"
+              ref={firstNameRef}
+              placeholder={userData.info.firstName}
+            />
           </div>
           <div className={classes["profile-info_actions"]}>
-            <label htmlFor="">Surname:</label>
-            <input type="text" />
+            <label>Surname:</label>
+            <input
+              type="text"
+              ref={lastNameRef}
+              placeholder={userData.info.lastName}
+            />
           </div>
           <div className={classes["profile-info_actions"]}>
-            <label htmlFor="">Age:</label>
-            <input type="number" min={7} />
+            <label>Age:</label>
+            <input
+              type="number"
+              min={7}
+              ref={ageInputRef}
+              placeholder={userData.info.userAge}
+            />
           </div>
           <button type="submit">Save</button>
         </form>

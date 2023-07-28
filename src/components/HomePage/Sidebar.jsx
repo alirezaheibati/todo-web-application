@@ -71,7 +71,7 @@ const Sidebar = () => {
             <FontAwesomeIcon icon={faCalendarDays} />
             <p>Calendar View</p>
           </li>
-          <li>
+          <li onClick={() => navigate("/profile")}>
             <FontAwesomeIcon icon={faGear} />
             <p>Setting</p>
           </li>
