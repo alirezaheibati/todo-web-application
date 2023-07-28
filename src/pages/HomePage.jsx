@@ -12,6 +12,7 @@ import LoadingSpinner from "../components/FrequentlyUsed/LoadingSpinner";
 const HomePage = () => {
   const { error, isLoading, sendRequest } = useHttp();
   const userData = useSelector((store) => store.userInfo);
+  console.log(userData.info);
   const dispatch = useDispatch();
   useEffect(() => {
     const UserDataHandler = (data) => {

@@ -5,11 +5,14 @@ import { useRef, useState } from "react";
 import useHttp from "./../../hooks/use-http";
 import LoadingSpinner from "../FrequentlyUsed/LoadingSpinner";
 import Modal from "../FrequentlyUsed/Modal";
+import { useNavigate } from "react-router-dom";
 const Register = (props) => {
   const [modalVisibility, setModalVisibility] = useState(true);
   const nameInputRef = useRef();
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
+
+  const navigate = useNavigate();
 
   const { error, isLoading, sendRequest } = useHttp();
 
@@ -23,6 +26,11 @@ const Register = (props) => {
 
   const registerdUserDataHandler = (result) => {
     console.log(result);
+    localStorage.setItem("userId", result.objectId);
+    localStorage.setItem("email", emailInputRef.current.value);
+    localStorage.setItem("username", nameInputRef.current.value);
+    localStorage.setItem("sessionToken", result.sessionToken);
+    navigate("/homepage");
   };
 
   const userRegisterHandler = (e) => {

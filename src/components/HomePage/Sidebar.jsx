@@ -6,19 +6,29 @@ import {
   faChevronDown,
   faGear,
   faList,
+  faQuestion,
   faTableColumns,
 } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import { userInfoSliceActions } from "../../store";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import Help from "./Help";
 const Sidebar = (props) => {
   const [hideMenu, setHideMenu] = useState(false);
+  const [helpVisibility, setHelpVisibility] = useState(false);
+
   const userData = useSelector((store) => store.userInfo);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const toggleMenu = () => {
     setHideMenu((prev) => !prev);
+  };
+  const helpShowHandler = () => {
+    setHelpVisibility(true);
+  };
+  const helpHideHandler = () => {
+    setHelpVisibility(false);
   };
   const userLogoutHandler = () => {
     if (confirm("Do you want to logout?")) {
@@ -29,6 +39,7 @@ const Sidebar = (props) => {
   };
   return (
     <div className={classes["sidebar_container"]}>
+      {helpVisibility && <Help onCloseHelp={helpHideHandler} />}
       <div className={classes["sidebar_branding"]}>
         <h1>
           Task<span>Mate</span>
@@ -75,7 +86,10 @@ const Sidebar = (props) => {
             <FontAwesomeIcon icon={faList} />
             <p>List View</p>
           </li>
-
+          <li onClick={helpShowHandler}>
+            <FontAwesomeIcon icon={faQuestion} />
+            <p>Help</p>
+          </li>
           <li onClick={() => navigate("/profile")}>
             <FontAwesomeIcon icon={faGear} />
             <p>Setting</p>

@@ -81,7 +81,7 @@ const LoginForm = (props) => {
           ref={passwordInputRef}
         />
 
-        <p>Forget Password?</p>
+        {/* <p>Forget Password?</p> */}
         <button type="submit" className={classes["login_form_btn"]}>
           Login
         </button>

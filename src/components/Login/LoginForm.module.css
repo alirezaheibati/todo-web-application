@@ -21,6 +21,7 @@
   color: #fff;
   background-color: #157aff;
   cursor: pointer;
+  margin: 10px 0;
 }
 .login_form_btn:active {
   transform: scale(0.98);

@@ -6,7 +6,11 @@ const userInfoSlice = createSlice({
   initialState: initialUserInfo,
   reducers: {
     setUserInfo(state, action) {
-      state.info = action.payload;
+      if (state.info.userTasks) {
+        state.info = action.payload;
+      } else {
+        state.info = { ...action.payload, userTasks: [] };
+      }
     },
     updateUserInfo(state) {
       state.refresher = !state.refresher;

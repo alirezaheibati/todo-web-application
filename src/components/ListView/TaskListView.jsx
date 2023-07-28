@@ -72,11 +72,6 @@ const TaskListView = (props) => {
 
         <li>
           <FontAwesomeIcon
-            icon={faPenToSquare}
-            title="edit task"
-            style={{ marginRight: "8px" }}
-          />
-          <FontAwesomeIcon
             icon={faRemove}
             title="remove task"
             onClick={removeTaskHandler}
