@@ -14,7 +14,6 @@ const HomePage = () => {
   const userData = useSelector((store) => store.userInfo);
   const dispatch = useDispatch();
   useEffect(() => {
-    console.log(userData.refresher);
     const UserDataHandler = (data) => {
       console.log(data);
       dispatch(userInfoSliceActions.setUserInfo(data));
@@ -35,11 +34,16 @@ const HomePage = () => {
       UserDataHandler
     );
   }, [userData.refresher]);
+
+  const [taskView, setTaskView] = useState("column");
+  const viewChangeHandler = (view) => {
+    setTaskView(view);
+  };
   return (
     <div className={classes["home-page_container"]}>
       {isLoading && <LoadingSpinner />}
-      <Sidebar />
-      <Overview />
+      <Sidebar onChangeView={viewChangeHandler} />
+      <Overview view={taskView} />
     </div>
   );
 };

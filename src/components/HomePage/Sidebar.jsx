@@ -12,7 +12,7 @@ import { useState } from "react";
 import { userInfoSliceActions } from "../../store";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-const Sidebar = () => {
+const Sidebar = (props) => {
   const [hideMenu, setHideMenu] = useState(false);
   const userData = useSelector((store) => store.userInfo);
   const dispatch = useDispatch();
@@ -59,18 +59,23 @@ const Sidebar = () => {
           </button>
         </div>
         <ul>
-          <li>
+          <li
+            onClick={() => {
+              props.onChangeView("column");
+            }}
+          >
             <FontAwesomeIcon icon={faTableColumns} />
             <p>Column View</p>
           </li>
-          <li>
+          <li
+            onClick={() => {
+              props.onChangeView("list");
+            }}
+          >
             <FontAwesomeIcon icon={faList} />
             <p>List View</p>
           </li>
-          <li>
-            <FontAwesomeIcon icon={faCalendarDays} />
-            <p>Calendar View</p>
-          </li>
+
           <li onClick={() => navigate("/profile")}>
             <FontAwesomeIcon icon={faGear} />
             <p>Setting</p>
