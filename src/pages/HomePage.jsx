@@ -16,6 +16,7 @@ const HomePage = () => {
   useEffect(() => {
     console.log(userData.refresher);
     const UserDataHandler = (data) => {
+      console.log(data);
       dispatch(userInfoSliceActions.setUserInfo(data));
     };
     sendRequest(

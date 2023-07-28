@@ -11,11 +11,18 @@ import {
   faCommentDots,
   faFlag,
 } from "@fortawesome/free-regular-svg-icons";
+import useHttp from "../../hooks/use-http";
+import { useRef } from "react";
+import { useSelector } from "react-redux";
 const TaskInformation = (props) => {
+  const { error, isLoading, sendRequest } = useHttp();
+  const commentInputRef = useRef();
+  const userData = useSelector((store) => store.userInfo);
   const taskInfoCloseHandler = (e) => {
     e.stopPropagation();
     props.onCloseTaskInfo();
   };
+
   return (
     <div className={classes["task-info_container"]}>
       <div className={classes["task-info_backdrop"]}></div>
@@ -82,8 +89,11 @@ const TaskInformation = (props) => {
               <p>Comment</p>
               <FontAwesomeIcon icon={faCommentDots} />
             </div>
-            <textarea placeholder="write your comment here..."></textarea>
-            <button type="submit">Add</button>
+            <textarea
+              placeholder="write your comment here..."
+              ref={commentInputRef}
+            ></textarea>
+            <button type="button">Add</button>
           </form>
         </div>
       </div>

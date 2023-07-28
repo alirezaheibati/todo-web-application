@@ -78,10 +78,10 @@ const TaskColumnView = (props) => {
           <button className={classes["task-column_menu"]}>
             <p>...</p>
             <ul>
-              <li>
+              {/* <li>
                 <FontAwesomeIcon icon={faPenToSquare} />
                 <p>Edit</p>
-              </li>
+              </li> */}
               <li onClick={removeTaskHandler}>
                 <FontAwesomeIcon icon={faRemove} style={{ color: "red" }} />
                 <p>Remove</p>

@@ -2,7 +2,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import classes from "./ListCategory.module.css";
 import { useState } from "react";
+import { useSelector } from "react-redux";
+
 const ListCategory = (props) => {
+  let tasksNumber = [];
+  const userTasks = useSelector((store) => store.userInfo);
+  if (userTasks.info.userTasks) {
+    tasksNumber = userTasks.info.userTasks.filter((task) => {
+      return task.taskCategory === props.title.toLowerCase();
+    });
+  }
   const [listCatview, setListCatview] = useState(true);
   const listViewHandler = () => {
     setListCatview((prev) => !prev);
@@ -22,7 +31,7 @@ const ListCategory = (props) => {
             <FontAwesomeIcon icon={faChevronDown} />
           </button>
           <p>
-            {props.title} <span>3</span>
+            {props.title} <span>{tasksNumber.length}</span>
           </p>
         </div>
 

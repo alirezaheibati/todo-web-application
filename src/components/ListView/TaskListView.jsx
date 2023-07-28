@@ -1,4 +1,5 @@
 import classes from "./TaskListView.module.css";
+import useHttp from "../../hooks/use-http";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFlag } from "@fortawesome/free-regular-svg-icons";
 import {
@@ -6,24 +7,67 @@ import {
   faPenToSquare,
   faRemove,
 } from "@fortawesome/free-solid-svg-icons";
+import { useDispatch, useSelector } from "react-redux";
+import { userInfoSliceActions } from "../../store";
 const TaskListView = (props) => {
+  const dispatch = useDispatch();
+  const userData = useSelector((store) => store.userInfo);
+
+  const { isLoading, error, sendRequest } = useHttp();
+  const removeTaskResultHandler = (data) => {
+    console.log(data);
+    dispatch(userInfoSliceActions.updateUserInfo());
+  };
+  const removeTaskHandler = () => {
+    sendRequest(
+      {
+        url: `https://parseapi.back4app.com/users/${localStorage.getItem(
+          "userId"
+        )}`,
+        method: "PUT",
+        headers: {
+          "X-Parse-Application-Id": "VUBEmOkNcXSUnYBMnOj68tnzu1jnkopyO6Ow2OGb",
+
+          "X-Parse-REST-API-Key": " NbyD4dNV7pNxrzzCRXQXLUd6cb8C2776i53CBSgW",
+          "X-Parse-Session-Token": localStorage.getItem("sessionToken"),
+          "Content-Type": "application/json",
+        },
+        body: {
+          userTasks: userData.info.userTasks.filter(
+            (task) => task.taskId !== props.id
+          ),
+        },
+      },
+      removeTaskResultHandler
+    );
+  };
+
   return (
     <div className={`${classes["list-category_container"]}`}>
       <div className={classes["list-category_title"]}>
-        <div></div>
-        <p>title for task 1</p>
+        <div style={{ backgroundColor: props.taskColor }}></div>
+        <p>{props.title}</p>
       </div>
 
       <ul className={classes["list-category_content"]}>
-        <li title={props.description}>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio ad
-          adipisci ratione voluptate error accusantium unde earum, veniam odio
-          nesciunt beatae nemo iusto cupiditate tempora quod hic animi libero
-          dolore?
-        </li>
-        <li>27 of July</li>
+        <li title={props.description}>{props.description}</li>
+        <li>{props.deadline}</li>
         <li>
-          <FontAwesomeIcon icon={faFlag} />
+          <FontAwesomeIcon
+            icon={faFlag}
+            title={props.priority}
+            style={{
+              color: `${
+                props.priority === "Urgent"
+                  ? "red"
+                  : props.priority === "High"
+                  ? "Orange"
+                  : props.priority === "Medium"
+                  ? "Orange"
+                  : "blue"
+              }`,
+            }}
+          />
         </li>
 
         <li>
@@ -32,7 +76,12 @@ const TaskListView = (props) => {
             title="edit task"
             style={{ marginRight: "8px" }}
           />
-          <FontAwesomeIcon icon={faRemove} title="remove task" />
+          <FontAwesomeIcon
+            icon={faRemove}
+            title="remove task"
+            onClick={removeTaskHandler}
+            style={{ color: "red", cursor: "pointer" }}
+          />
         </li>
       </ul>
     </div>
