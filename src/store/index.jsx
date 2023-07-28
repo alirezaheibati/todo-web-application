@@ -1,6 +1,6 @@
 import { createSlice, configureStore } from "@reduxjs/toolkit";
 
-const initialUserInfo = { info: {}, refresher: true };
+const initialUserInfo = { info: {}, refresher: true, dragedTaskId: null };
 const userInfoSlice = createSlice({
   name: "userInfo",
   initialState: initialUserInfo,
@@ -13,6 +13,9 @@ const userInfoSlice = createSlice({
     },
     userLogout(state) {
       state.info = {};
+    },
+    getDragedItem(state, action) {
+      state.dragedTaskId = action.payload;
     },
   },
 });

@@ -50,6 +50,15 @@ const TaskColumnView = (props) => {
       removeTaskResultHandler
     );
   };
+
+  //drag code
+  const dragStartHandler = () => {
+    dispatch(userInfoSliceActions.getDragedItem(props.id));
+  };
+  const dragEndHandler = () => {
+    // dispatch(userInfoSliceActions.getDragedItem(null));
+  };
+
   return (
     <>
       {taskInfoVisibility && (
@@ -66,6 +75,9 @@ const TaskColumnView = (props) => {
         />
       )}
       <div
+        onDragStart={dragStartHandler}
+        onDragEnd={dragEndHandler}
+        draggable={true}
         className={classes["task-column_container"]}
         onClick={taskInfoShowHandler}
         style={{ backgroundColor: props.taskColor }}
@@ -112,7 +124,7 @@ const TaskColumnView = (props) => {
                     : props.priority === "High"
                     ? "Orange"
                     : props.priority === "Medium"
-                    ? "Orange"
+                    ? "#FFE17B"
                     : "blue"
                 }`,
               }}

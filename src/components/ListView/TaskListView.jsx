@@ -63,7 +63,7 @@ const TaskListView = (props) => {
                   : props.priority === "High"
                   ? "Orange"
                   : props.priority === "Medium"
-                  ? "Orange"
+                  ? "#FFE17B"
                   : "blue"
               }`,
             }}
